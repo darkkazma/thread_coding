@@ -1,14 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserValidation } from "@/lib/validations/user";
 import { Input } from "../ui/input";
@@ -17,7 +10,7 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { Textarea } from "../ui/textarea";
-import { isbase64Image } from "@/lib/utils";
+import { isBase64Image } from "@/lib/utils";
 import { useUploadThing } from "@/lib/uploadthing";
 import { updateUser } from "@/lib/actions/user.action";
 import { usePathname, useRouter } from "next/navigation";
@@ -49,10 +42,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     },
   });
 
-  const handleImage = (
-    e: ChangeEvent<HTMLInputElement>,
-    filedChange: (value: string) => void
-  ) => {
+  const handleImage = (e: ChangeEvent<HTMLInputElement>, filedChange: (value: string) => void) => {
     e.preventDefault();
     const fileReader = new FileReader();
     if (e.target.files && e.target.files.length > 0) {
@@ -70,7 +60,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
   };
   const onSubmit = async (values: z.infer<typeof UserValidation>) => {
     const blob = values.profile_photo;
-    const hasImageChanged = isbase64Image(blob);
+    const hasImageChanged = isBase64Image(blob);
     if (hasImageChanged) {
       const imgRes = await startUpload(files);
 
@@ -96,10 +86,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
   };
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col justify-start gap-10"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start gap-10">
         <FormField
           control={form.control}
           name="profile_photo"
@@ -144,15 +131,9 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
           name="name"
           render={({ field }) => (
             <FormItem className="flex flex-col gap-3 w-full">
-              <FormLabel className="text-base-semibold text-light-2">
-                Name
-              </FormLabel>
+              <FormLabel className="text-base-semibold text-light-2">Name</FormLabel>
               <FormControl>
-                <Input
-                  type="text"
-                  className="account-form_input no-focus"
-                  {...field}
-                />
+                <Input type="text" className="account-form_input no-focus" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -164,15 +145,9 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
           name="username"
           render={({ field }) => (
             <FormItem className="flex flex-col gap-3 w-full">
-              <FormLabel className="text-base-semibold text-light-2">
-                UserName
-              </FormLabel>
+              <FormLabel className="text-base-semibold text-light-2">UserName</FormLabel>
               <FormControl>
-                <Input
-                  type="text"
-                  className="account-form_input no-focus"
-                  {...field}
-                />
+                <Input type="text" className="account-form_input no-focus" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -184,15 +159,9 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
           name="bio"
           render={({ field }) => (
             <FormItem className="flex flex-col gap-3 w-full">
-              <FormLabel className="text-base-semibold text-light-2">
-                Bio
-              </FormLabel>
+              <FormLabel className="text-base-semibold text-light-2">Bio</FormLabel>
               <FormControl>
-                <Textarea
-                  rows={10}
-                  className="account-form_input no-focus"
-                  {...field}
-                />
+                <Textarea rows={10} className="account-form_input no-focus" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
